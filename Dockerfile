@@ -27,6 +27,7 @@ RUN set -x \
 	locales \
     sudo \
 	&& apt-get install -y \
+	xauth \
 	xvfb \
 	libgl1-mesa-dri:i386 \
 	libgl1-mesa-glx:i386 \
