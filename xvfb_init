@@ -1,0 +1,26 @@
+XVFB=/usr/bin/Xvfb
+XVFBARGS=":99 -screen 0 1280x720x24 -ac +extension RANDR +render -noreset"
+PIDFILE=/var/run/xvfb/xvfb.pid
+case "$1" in
+	start)
+		export DISPLAY=:99
+		echo -n "Starting virtual X frame buffer: Xvfb"
+		start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile --background --exec $XVFB -- $XVFBARGS
+		echo "."
+		;;
+	stop)
+		echo -n "Stopping virtual X frame buffer: Xvfb"
+		start-stop-daemon --stop --quiet --pidfile $PIDFILE
+		rm $PIDFILE
+		echo "."
+		;;
+	restart)
+		$0 stop
+		$0 start
+		;;
+	*)
+	echo "Usage: /etc/init.d/xvfb {start|stop|restart}"
+	exit 1
+esac
+
+exit 0
