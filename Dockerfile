@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
+LABEL author="Antoni Baum (Yard1) <antoni.baum@protonmail.com>"
 
 RUN set -x \
 	&& dpkg --add-architecture i386 \
