@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 LABEL author="Antoni Baum (Yard1) <antoni.baum@protonmail.com>"
 
 RUN set -x \
@@ -60,7 +60,7 @@ WORKDIR "/home/steam"
 # Run Steam once to let it update, and cache the update
 ADD --chown=steam:steam lib/update_steam.sh /home/steam/
 RUN /home/steam/update_steam.sh
-
+RUN /home/steam/update_steam.sh
 ENV LANG en_US.utf8
 
 ENTRYPOINT [ "/entrypoint.sh" ]

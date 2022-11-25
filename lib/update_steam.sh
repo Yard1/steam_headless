@@ -1,17 +1,22 @@
 command="xvfb-run -a /usr/games/steam"
 log="steam.log"
-match="STEAM_RUNTIME_HEAVY:"
+match="Verification complete"
+shutdown_match="Shutdown"
 pkill Xvfb
 $command > "$log" 2>&1 &
 pid=$!
 
-while sleep 10
+while sleep 5
 do
-    tail -n 2 $log
+    echo " "
+    cat $log
+    
     if fgrep --quiet "$match" "$log"
     then
         echo "pkill steam"
+        sleep 10
         pkill "steam"
+        echo " "
         cat $log
         sleep 1
         exit 0
